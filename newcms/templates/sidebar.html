@@ -1,0 +1,49 @@
+
+ <div class="card my-4">
+          <h5 class="card-header">Search</h5>
+          <div class="card-body">
+            <div class="input-group">
+             <form method = 'GET'  action = "{% url 'search' %}">
+              <input type="text" required='required' name='q' class="form-control" placeholder="Search for..."  value = "{{ search }}"> 
+              
+                <button type='submit' class="btn btn-secondary" type="button">Go!</button>
+             </form>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Categories</h5>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6">
+
+               
+                <ul class="list-unstyled mb-0">
+                 {% for cat in category.all %}
+                 <li><a href="">{{  cat.title }}</a></li>
+                
+                {% endfor %}
+                	
+              </ul>
+              </div>
+              {% comment %} <div class="col-lg-6">
+              	<ul class="list-unstyled mb-0">
+              		<li><a href="">Cat1</a></li>
+              		<li><a href="">Cat1</a></li>
+              	</ul>
+              </div> {% endcomment %}
+             
+            </div>
+          </div>
+        </div>
+
+        <!-- Side Widget -->
+        <div class="card my-4">
+          <h5 class="card-header">Side Widget</h5>
+          <div class="card-body">
+           It Didn't have anything LOL!!
+          </div>
+        </div>

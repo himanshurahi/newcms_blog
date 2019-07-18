@@ -1,0 +1,87 @@
+{% extends 'templates/base.html' %}
+
+  {% block main %}
+<div class="col-md-8">
+
+    <h1> {% for message in messages %}
+        <div class="alert alert-danger" style="">{{ message }}</div>
+         {% endfor %}</h1>
+        
+      {% if search %}
+        <div class='alert alert-danger bg-danger text-white mt-5'>
+        No Result Found For {{ search }}
+        
+        </div>
+        {% else %}
+        <h1 class="my-4">Welcome to My Blog
+       
+        </h1>
+      
+      {% endif %}
+      
+     
+
+        <!-- Blog Post -->
+        {% for post in posts %}
+        <div class="card mb-4">
+          <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{ post.title|title }}</h2>
+            <p class="card-text">{{ post.body  }}</p>
+            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{ post.pub_date }} by
+            <a href="#">{{ post.author.username }}</a>
+           
+            
+
+            <a href='#' style="float: right;" class="like">Like ({{ post.like_count }})</a>
+            <form method="POST" action="{% url 'like' post.id %}" id="like_form" %} >
+              {% csrf_token %}
+             
+             
+            </form>
+          </div>
+        </div>
+        {% endfor %}
+
+       
+    
+
+    {% if posts.has_other_pages %}
+  <ul class="pagination">
+    {% if posts.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a></li>
+    {% else %}
+       <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+    {% endif %}
+    {% for i in posts.paginator.page_range %}
+      {% if library.number == i %}
+        <li class="page-item active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+      {% else %}
+        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if posts.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ posts.next_page_number }}">Next</a></li>
+    {% else %}
+       <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+    {% endif %}
+  </ul>
+{% endif %}
+
+        <!-- Pagination -->
+        {% comment %} <ul class="pagination justify-content-center mb-4">
+          <li class="page-item">
+            <a class="page-link" href="#">&larr; Older</a>
+          </li>
+          <li class="page-item disabled">
+            <a class="page-link" href="#">Newer &rarr;</a>
+          </li>
+        </ul> {% endcomment %}
+
+      </div>
+   
+
+  {% endblock %}

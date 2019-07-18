@@ -1,0 +1,73 @@
+{% extends 'templates/base.html' %}
+
+  {% block main %}
+<div class="col-md-8">
+
+        <h1 class="my-4">Edit Posts </h1>
+        <form method="Post" action="">
+          {% csrf_token %}
+
+        
+          <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" class="form-control" value="{{ posts.title }}">
+          </div>
+
+          <div class="form-group">
+            <label>Body</label>
+            <textarea class="form-control" name="body" >{{ posts.body }}</textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Status</label>
+            <select class="form-control" name="status">
+             
+
+              {% if posts.status == 'published' %}
+              <option value="published" selected="selected">Published</option>
+              <option value="draft">Draft</option>
+              {% else %}
+              <option value="draft" selected="selected">Draft</option>
+              <option value="published">Published</option>
+              {% endif %}
+            </select>
+          </div>
+
+
+           <div class="form-group">
+            <label>Category</label>
+            <select class="form-control" name="category_id">
+              {% for cat in category.all %}
+              {% if posts.category.title == cat.title %}
+              <option selected="selected" value="{{ cat.id }}" >{{ cat.title }}</option>
+              {% else %}
+              <option value="{{ cat.id }}"  >{{ cat.title }}</option>
+              {% endif %}
+
+              {% endfor %}
+           
+            </select>
+          </div>
+          
+
+         <button type="submit" class="btn btn-success">Save</button>
+
+
+
+
+        </form>
+
+        <!-- Blog Post -->
+     
+
+        <!-- Blog Post -->
+     
+        <!-- Blog Post -->
+   
+
+        <!-- Pagination -->
+      
+
+      </div>
+
+  {% endblock %}

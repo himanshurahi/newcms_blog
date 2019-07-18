@@ -1,0 +1,51 @@
+{% extends 'templates/base.html' %}
+
+  {% block main %}
+<div class="col-md-8">
+
+        <h1 class="my-4">My Posts 
+         
+          <a href="{% url 'addposts' %}" class="btn btn-primary">Add New</a>
+        </h1>
+
+        <!-- Blog Post -->
+      
+        {% if posts.all %}
+        
+        {% for post in posts.all %}
+        
+        <div class="card mb-4">
+          <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap">
+          <div class="card-body">
+            <h2 class="card-title">{{ post.title|title }}</h2>
+            <p class="card-text">{{ post.body }}</p>
+            <p style="float: right"><b>Status: </b>{{ post.status|title }}</p>
+            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+          </div>
+          <div class="card-footer text-muted">
+            Posted on {{ post.pub_date }} by
+            <a href="#">{{ post.author.username }}</a>
+          
+            <!-- <button type="submit" class="btn btn-danger" style="float: right; margin-left: 2px;">Delete</button> -->
+            <a href="{% url 'delete' post.id %}" class="btn btn-danger" style="float: right; margin-left: 2px; ">Delete</a>
+              <!-- <button type="submit" class="btn btn-warning" style="float: right;">Edit</button> -->
+              <a href="{% url 'editpost' post.id %}" class="btn btn-warning" style="float: right;">Edit</a>
+          </div>
+        </div>
+      
+        
+        {% endfor %}
+
+        {% else %}
+        <h1>No Records Found</h1>
+        
+        {% endif %}
+   
+        
+
+      
+
+
+      </div>
+
+  {% endblock %}
