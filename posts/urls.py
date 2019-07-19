@@ -27,5 +27,6 @@ urlpatterns = [
     path('add/', views.addposts, name='addposts'),
     path('edit/<int:post_id>', views.editpost, name='editpost'),
     # path('test/', views.test),
-    path('delete/<int:post_id>', views.delete, name='delete')
+    path('delete/<int:post_id>', views.delete, name='delete'),
+    path('details/<str:slug>',views.post_details, name = 'post_details'),
 ]

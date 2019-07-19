@@ -20,7 +20,7 @@
             <h2 class="card-title">{{ post.title|title }}</h2>
             <p class="card-text">{{ post.body }}</p>
             <p style="float: right"><b>Status: </b>{{ post.status|title }}</p>
-            <a href="#" class="btn btn-primary">Read More &rarr;</a>
+            <a href="{% url 'post_details' post.slug %}" class="btn btn-primary">Read More &rarr;</a>
           </div>
           <div class="card-footer text-muted">
             Posted on {{ post.pub_date }} by
